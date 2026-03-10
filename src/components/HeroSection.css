@@ -1,0 +1,87 @@
+/* Reset and body rules covered by Tailwind */
+.canvas-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.scroll-content {
+    position: relative;
+    z-index: 10;
+}
+
+.sequence-section {
+    position: relative;
+    width: 100vw;
+    height: 250vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10vw 5vw;
+}
+
+.fixed-text-container {
+    position: fixed;
+    z-index: 5;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    height: 300px;
+}
+
+.fixed-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: auto;
+}
+
+.text-container {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.text-container h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+}
+
+.text-container p {
+    font-weight: 400;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.center-text {
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .fixed-text-container {
+        height: 200px;
+    }
+}
+
+.gallery-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
