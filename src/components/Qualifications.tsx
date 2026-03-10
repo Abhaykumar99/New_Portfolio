@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const qualifications = [
     {
         id: 1,
-        title: "Bachelor of Science in Computer Science",
+        title: "Bachelor of Technology in Computer Science & Engineering",
         institution: "Shobhit Institute of Engineering & Technology",
         year: "2023 - 2027",
         description: "Studying core computer science subjects including Data Structures, Algorithms, Operating Systems, Computer Networks, Web Development, and Database Management.",
