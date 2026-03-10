@@ -97,11 +97,28 @@ export default function HeroSection() {
             const images: HTMLImageElement[] = [];
             for (let i = 1; i <= seq.frameCount; i++) {
                 const img = new Image();
-                img.src = `/sequence/${seq.folder}/ezgif-frame-${pad(i, 3)}.jpg`;
                 images.push(img);
             }
             allImages.push(images);
         });
+
+        // Load first frame immediately to prevent black screen
+        const firstFrame = allImages[0][0];
+        firstFrame.src = `${import.meta.env.BASE_URL}sequence/${sequences[0].folder}/ezgif-frame-001.jpg`;
+
+        const loadRestOfFrames = () => {
+            sequences.forEach((seq, seqIndex) => {
+                for (let i = 1; i <= seq.frameCount; i++) {
+                    if (seqIndex === 0 && i === 1) continue;
+
+                    // Stagger network requests slightly to not choke the browser
+                    setTimeout(() => {
+                        const img = allImages[seqIndex][i - 1];
+                        img.src = `${import.meta.env.BASE_URL}sequence/${seq.folder}/ezgif-frame-${pad(i, 3)}.jpg`;
+                    }, (seqIndex * 240 + i) * 5); // small delay between each image fetch
+                }
+            });
+        };
 
         const render = () => {
             if (!allImages[currentSeqIndex]) return;
@@ -110,16 +127,25 @@ export default function HeroSection() {
                 drawImageProp(context, img);
             } else if (img) {
                 img.onload = render;
+                img.onerror = render; // ensure we attempt render even if one frame fails
             }
         };
 
         window.addEventListener("resize", resizeCanvas);
         resizeCanvas();
 
-        if (allImages[0][0].complete) {
+        if (firstFrame.complete) {
             render();
+            loadRestOfFrames();
         } else {
-            allImages[0][0].onload = render;
+            firstFrame.onload = () => {
+                render();
+                loadRestOfFrames();
+            };
+            firstFrame.onerror = () => {
+                render();
+                loadRestOfFrames();
+            };
         }
 
         // 4. GSAP Frame Triggers
