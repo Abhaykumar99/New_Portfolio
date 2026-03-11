@@ -3,7 +3,7 @@
 Welcome to my personal portfolio! This is a high-performance, visually stunning website built with modern web technologies to showcase my projects, skills, and experiences.
 
 ## 🌐 Live Preview
-[View Live Site](https://github.com/Abhaykumar99/New_Portfolio) *(Update with your deployment link)*
+[View Live Site](https://abhay-012-portfolio.vercel.app/)
 
 ---
 
